@@ -52,3 +52,9 @@ def subscriptHistory(uid):
         ret.append(temp)
 
     return ret
+
+def addProduct(name, firstPrice, deadline):
+	sql = "insert into 上架 (name, firstPrice, deadline, nowPrice) values (%s, %s, %s, %s, %s)"
+	cur.execute(sql, (name, firstPrice, deadline, firstPrice))
+	conn.commit()
+	return True

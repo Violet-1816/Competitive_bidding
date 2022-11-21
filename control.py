@@ -20,7 +20,8 @@ except:
 
 para=()
 #we can start accessing DB now
-if act=='g': #get one record by xid
+
+if act=='getProductList': #get one record by xid
 	jsonStr=form.getvalue('dat')
 	dat=json.loads(jsonStr)
 	msgList = msgModel.getList() #get an array from model
@@ -29,7 +30,13 @@ if act=='g': #get one record by xid
 		"list": msgList
 	}
 	print(json.dumps(result,ensure_ascii=True)) #dump json string to client
-elif act=='like':
-	mid=int(form.getvalue('id'))
-	print(msgModel.like(mid))
-
+elif act=='subscript':
+	jsonStr=form.getvalue('dat')
+	dat=json.loads(jsonStr)
+	jsonStr=form.getvalue('dat')
+	ret=msgModel(jsonStr['uid'],jsonStr['product_uid'],jsonStr['price'])
+	result = {
+		"dat": dat,
+		"list": ret
+	}
+	print(json.dumps(result,ensure_ascii=True))
